@@ -1,0 +1,460 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> INT SP MAIN OPENPARAN CLOSEPARAN NL BEGINS NL stmt ENDS
+Rule 2     stmt -> declstmt whilestmt returnstmt
+Rule 3     declstmt -> SP INT SP ID EQUAL NUM SEMICOL NL
+Rule 4     whilestmt -> SP WHILE OPENPARAN ID GREATER NUM CLOSEPARAN NL whilebody SP ENDS SP WHILE NL
+Rule 5     whilebody -> SP ID EQUAL ID PLUS NUM SEMICOL NL SP ID EQUAL ID DIVIDE NUM SEMICOL NL
+Rule 6     returnstmt -> SP RETURN SP ID NL
+
+Terminals, with rules where they appear
+
+BEGINS               : 1
+CLOSEPARAN           : 1 4
+DIVIDE               : 5
+ENDS                 : 1 4
+EQUAL                : 3 5 5
+GREATER              : 4
+ID                   : 3 4 5 5 5 5 6
+INT                  : 1 3
+MAIN                 : 1
+NL                   : 1 1 3 4 4 5 5 6
+NUM                  : 3 4 5 5
+OPENPARAN            : 1 4
+PLUS                 : 5
+RETURN               : 6
+SEMICOL              : 3 5 5
+SP                   : 1 3 3 4 4 4 5 5 6 6
+WHILE                : 4 4
+error                : 
+
+Nonterminals, with rules where they appear
+
+declstmt             : 2
+program              : 0
+returnstmt           : 2
+stmt                 : 1
+whilebody            : 4
+whilestmt            : 2
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . INT SP MAIN OPENPARAN CLOSEPARAN NL BEGINS NL stmt ENDS
+
+    INT             shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> INT . SP MAIN OPENPARAN CLOSEPARAN NL BEGINS NL stmt ENDS
+
+    SP              shift and go to state 3
+
+
+state 3
+
+    (1) program -> INT SP . MAIN OPENPARAN CLOSEPARAN NL BEGINS NL stmt ENDS
+
+    MAIN            shift and go to state 4
+
+
+state 4
+
+    (1) program -> INT SP MAIN . OPENPARAN CLOSEPARAN NL BEGINS NL stmt ENDS
+
+    OPENPARAN       shift and go to state 5
+
+
+state 5
+
+    (1) program -> INT SP MAIN OPENPARAN . CLOSEPARAN NL BEGINS NL stmt ENDS
+
+    CLOSEPARAN      shift and go to state 6
+
+
+state 6
+
+    (1) program -> INT SP MAIN OPENPARAN CLOSEPARAN . NL BEGINS NL stmt ENDS
+
+    NL              shift and go to state 7
+
+
+state 7
+
+    (1) program -> INT SP MAIN OPENPARAN CLOSEPARAN NL . BEGINS NL stmt ENDS
+
+    BEGINS          shift and go to state 8
+
+
+state 8
+
+    (1) program -> INT SP MAIN OPENPARAN CLOSEPARAN NL BEGINS . NL stmt ENDS
+
+    NL              shift and go to state 9
+
+
+state 9
+
+    (1) program -> INT SP MAIN OPENPARAN CLOSEPARAN NL BEGINS NL . stmt ENDS
+    (2) stmt -> . declstmt whilestmt returnstmt
+    (3) declstmt -> . SP INT SP ID EQUAL NUM SEMICOL NL
+
+    SP              shift and go to state 10
+
+    stmt                           shift and go to state 11
+    declstmt                       shift and go to state 12
+
+state 10
+
+    (3) declstmt -> SP . INT SP ID EQUAL NUM SEMICOL NL
+
+    INT             shift and go to state 13
+
+
+state 11
+
+    (1) program -> INT SP MAIN OPENPARAN CLOSEPARAN NL BEGINS NL stmt . ENDS
+
+    ENDS            shift and go to state 14
+
+
+state 12
+
+    (2) stmt -> declstmt . whilestmt returnstmt
+    (4) whilestmt -> . SP WHILE OPENPARAN ID GREATER NUM CLOSEPARAN NL whilebody SP ENDS SP WHILE NL
+
+    SP              shift and go to state 16
+
+    whilestmt                      shift and go to state 15
+
+state 13
+
+    (3) declstmt -> SP INT . SP ID EQUAL NUM SEMICOL NL
+
+    SP              shift and go to state 17
+
+
+state 14
+
+    (1) program -> INT SP MAIN OPENPARAN CLOSEPARAN NL BEGINS NL stmt ENDS .
+
+    $end            reduce using rule 1 (program -> INT SP MAIN OPENPARAN CLOSEPARAN NL BEGINS NL stmt ENDS .)
+
+
+state 15
+
+    (2) stmt -> declstmt whilestmt . returnstmt
+    (6) returnstmt -> . SP RETURN SP ID NL
+
+    SP              shift and go to state 19
+
+    returnstmt                     shift and go to state 18
+
+state 16
+
+    (4) whilestmt -> SP . WHILE OPENPARAN ID GREATER NUM CLOSEPARAN NL whilebody SP ENDS SP WHILE NL
+
+    WHILE           shift and go to state 20
+
+
+state 17
+
+    (3) declstmt -> SP INT SP . ID EQUAL NUM SEMICOL NL
+
+    ID              shift and go to state 21
+
+
+state 18
+
+    (2) stmt -> declstmt whilestmt returnstmt .
+
+    ENDS            reduce using rule 2 (stmt -> declstmt whilestmt returnstmt .)
+
+
+state 19
+
+    (6) returnstmt -> SP . RETURN SP ID NL
+
+    RETURN          shift and go to state 22
+
+
+state 20
+
+    (4) whilestmt -> SP WHILE . OPENPARAN ID GREATER NUM CLOSEPARAN NL whilebody SP ENDS SP WHILE NL
+
+    OPENPARAN       shift and go to state 23
+
+
+state 21
+
+    (3) declstmt -> SP INT SP ID . EQUAL NUM SEMICOL NL
+
+    EQUAL           shift and go to state 24
+
+
+state 22
+
+    (6) returnstmt -> SP RETURN . SP ID NL
+
+    SP              shift and go to state 25
+
+
+state 23
+
+    (4) whilestmt -> SP WHILE OPENPARAN . ID GREATER NUM CLOSEPARAN NL whilebody SP ENDS SP WHILE NL
+
+    ID              shift and go to state 26
+
+
+state 24
+
+    (3) declstmt -> SP INT SP ID EQUAL . NUM SEMICOL NL
+
+    NUM             shift and go to state 27
+
+
+state 25
+
+    (6) returnstmt -> SP RETURN SP . ID NL
+
+    ID              shift and go to state 28
+
+
+state 26
+
+    (4) whilestmt -> SP WHILE OPENPARAN ID . GREATER NUM CLOSEPARAN NL whilebody SP ENDS SP WHILE NL
+
+    GREATER         shift and go to state 29
+
+
+state 27
+
+    (3) declstmt -> SP INT SP ID EQUAL NUM . SEMICOL NL
+
+    SEMICOL         shift and go to state 30
+
+
+state 28
+
+    (6) returnstmt -> SP RETURN SP ID . NL
+
+    NL              shift and go to state 31
+
+
+state 29
+
+    (4) whilestmt -> SP WHILE OPENPARAN ID GREATER . NUM CLOSEPARAN NL whilebody SP ENDS SP WHILE NL
+
+    NUM             shift and go to state 32
+
+
+state 30
+
+    (3) declstmt -> SP INT SP ID EQUAL NUM SEMICOL . NL
+
+    NL              shift and go to state 33
+
+
+state 31
+
+    (6) returnstmt -> SP RETURN SP ID NL .
+
+    ENDS            reduce using rule 6 (returnstmt -> SP RETURN SP ID NL .)
+
+
+state 32
+
+    (4) whilestmt -> SP WHILE OPENPARAN ID GREATER NUM . CLOSEPARAN NL whilebody SP ENDS SP WHILE NL
+
+    CLOSEPARAN      shift and go to state 34
+
+
+state 33
+
+    (3) declstmt -> SP INT SP ID EQUAL NUM SEMICOL NL .
+
+    SP              reduce using rule 3 (declstmt -> SP INT SP ID EQUAL NUM SEMICOL NL .)
+
+
+state 34
+
+    (4) whilestmt -> SP WHILE OPENPARAN ID GREATER NUM CLOSEPARAN . NL whilebody SP ENDS SP WHILE NL
+
+    NL              shift and go to state 35
+
+
+state 35
+
+    (4) whilestmt -> SP WHILE OPENPARAN ID GREATER NUM CLOSEPARAN NL . whilebody SP ENDS SP WHILE NL
+    (5) whilebody -> . SP ID EQUAL ID PLUS NUM SEMICOL NL SP ID EQUAL ID DIVIDE NUM SEMICOL NL
+
+    SP              shift and go to state 36
+
+    whilebody                      shift and go to state 37
+
+state 36
+
+    (5) whilebody -> SP . ID EQUAL ID PLUS NUM SEMICOL NL SP ID EQUAL ID DIVIDE NUM SEMICOL NL
+
+    ID              shift and go to state 38
+
+
+state 37
+
+    (4) whilestmt -> SP WHILE OPENPARAN ID GREATER NUM CLOSEPARAN NL whilebody . SP ENDS SP WHILE NL
+
+    SP              shift and go to state 39
+
+
+state 38
+
+    (5) whilebody -> SP ID . EQUAL ID PLUS NUM SEMICOL NL SP ID EQUAL ID DIVIDE NUM SEMICOL NL
+
+    EQUAL           shift and go to state 40
+
+
+state 39
+
+    (4) whilestmt -> SP WHILE OPENPARAN ID GREATER NUM CLOSEPARAN NL whilebody SP . ENDS SP WHILE NL
+
+    ENDS            shift and go to state 41
+
+
+state 40
+
+    (5) whilebody -> SP ID EQUAL . ID PLUS NUM SEMICOL NL SP ID EQUAL ID DIVIDE NUM SEMICOL NL
+
+    ID              shift and go to state 42
+
+
+state 41
+
+    (4) whilestmt -> SP WHILE OPENPARAN ID GREATER NUM CLOSEPARAN NL whilebody SP ENDS . SP WHILE NL
+
+    SP              shift and go to state 43
+
+
+state 42
+
+    (5) whilebody -> SP ID EQUAL ID . PLUS NUM SEMICOL NL SP ID EQUAL ID DIVIDE NUM SEMICOL NL
+
+    PLUS            shift and go to state 44
+
+
+state 43
+
+    (4) whilestmt -> SP WHILE OPENPARAN ID GREATER NUM CLOSEPARAN NL whilebody SP ENDS SP . WHILE NL
+
+    WHILE           shift and go to state 45
+
+
+state 44
+
+    (5) whilebody -> SP ID EQUAL ID PLUS . NUM SEMICOL NL SP ID EQUAL ID DIVIDE NUM SEMICOL NL
+
+    NUM             shift and go to state 46
+
+
+state 45
+
+    (4) whilestmt -> SP WHILE OPENPARAN ID GREATER NUM CLOSEPARAN NL whilebody SP ENDS SP WHILE . NL
+
+    NL              shift and go to state 47
+
+
+state 46
+
+    (5) whilebody -> SP ID EQUAL ID PLUS NUM . SEMICOL NL SP ID EQUAL ID DIVIDE NUM SEMICOL NL
+
+    SEMICOL         shift and go to state 48
+
+
+state 47
+
+    (4) whilestmt -> SP WHILE OPENPARAN ID GREATER NUM CLOSEPARAN NL whilebody SP ENDS SP WHILE NL .
+
+    SP              reduce using rule 4 (whilestmt -> SP WHILE OPENPARAN ID GREATER NUM CLOSEPARAN NL whilebody SP ENDS SP WHILE NL .)
+
+
+state 48
+
+    (5) whilebody -> SP ID EQUAL ID PLUS NUM SEMICOL . NL SP ID EQUAL ID DIVIDE NUM SEMICOL NL
+
+    NL              shift and go to state 49
+
+
+state 49
+
+    (5) whilebody -> SP ID EQUAL ID PLUS NUM SEMICOL NL . SP ID EQUAL ID DIVIDE NUM SEMICOL NL
+
+    SP              shift and go to state 50
+
+
+state 50
+
+    (5) whilebody -> SP ID EQUAL ID PLUS NUM SEMICOL NL SP . ID EQUAL ID DIVIDE NUM SEMICOL NL
+
+    ID              shift and go to state 51
+
+
+state 51
+
+    (5) whilebody -> SP ID EQUAL ID PLUS NUM SEMICOL NL SP ID . EQUAL ID DIVIDE NUM SEMICOL NL
+
+    EQUAL           shift and go to state 52
+
+
+state 52
+
+    (5) whilebody -> SP ID EQUAL ID PLUS NUM SEMICOL NL SP ID EQUAL . ID DIVIDE NUM SEMICOL NL
+
+    ID              shift and go to state 53
+
+
+state 53
+
+    (5) whilebody -> SP ID EQUAL ID PLUS NUM SEMICOL NL SP ID EQUAL ID . DIVIDE NUM SEMICOL NL
+
+    DIVIDE          shift and go to state 54
+
+
+state 54
+
+    (5) whilebody -> SP ID EQUAL ID PLUS NUM SEMICOL NL SP ID EQUAL ID DIVIDE . NUM SEMICOL NL
+
+    NUM             shift and go to state 55
+
+
+state 55
+
+    (5) whilebody -> SP ID EQUAL ID PLUS NUM SEMICOL NL SP ID EQUAL ID DIVIDE NUM . SEMICOL NL
+
+    SEMICOL         shift and go to state 56
+
+
+state 56
+
+    (5) whilebody -> SP ID EQUAL ID PLUS NUM SEMICOL NL SP ID EQUAL ID DIVIDE NUM SEMICOL . NL
+
+    NL              shift and go to state 57
+
+
+state 57
+
+    (5) whilebody -> SP ID EQUAL ID PLUS NUM SEMICOL NL SP ID EQUAL ID DIVIDE NUM SEMICOL NL .
+
+    SP              reduce using rule 5 (whilebody -> SP ID EQUAL ID PLUS NUM SEMICOL NL SP ID EQUAL ID DIVIDE NUM SEMICOL NL .)
+

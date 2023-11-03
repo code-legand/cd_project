@@ -385,9 +385,9 @@ static char *yy_last_accepting_cpos;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 ".\\project.l"
+#line 1 "project.l"
 #define INITIAL 0
-#line 2 ".\\project.l"
+#line 2 "project.l"
     #include "y.tab.h"
     extern char * var;
     extern int num;
@@ -543,7 +543,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 7 ".\\project.l"
+#line 7 "project.l"
 
 #line 549 "lex.yy.c"
 
@@ -630,97 +630,97 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 8 ".\\project.l"
+#line 8 "project.l"
 {return INT;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 9 ".\\project.l"
+#line 9 "project.l"
 {return MAIN;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 10 ".\\project.l"
+#line 10 "project.l"
 {return OPENPARAN;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 11 ".\\project.l"
+#line 11 "project.l"
 {return CLOSEPARAN;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 12 ".\\project.l"
+#line 12 "project.l"
 {return BEGINS;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 13 ".\\project.l"
+#line 13 "project.l"
 {return ENDS;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 14 ".\\project.l"
+#line 14 "project.l"
 {return WHILE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 15 ".\\project.l"
+#line 15 "project.l"
 {return RETURN;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 16 ".\\project.l"
+#line 16 "project.l"
 {return GREATER;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 17 ".\\project.l"
+#line 17 "project.l"
 {return EQUAL;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 18 ".\\project.l"
+#line 18 "project.l"
 {return PLUS;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 19 ".\\project.l"
+#line 19 "project.l"
 {return DIVIDE;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 20 ".\\project.l"
+#line 20 "project.l"
 {return SEMICOL;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 21 ".\\project.l"
+#line 21 "project.l"
 {return SP;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 22 ".\\project.l"
+#line 22 "project.l"
 {return NL;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 23 ".\\project.l"
+#line 23 "project.l"
 {var = yytext; return ID;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 24 ".\\project.l"
+#line 24 "project.l"
 {num = atoi(yytext); return NUM;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 25 ".\\project.l"
+#line 25 "project.l"
 {return yytext[0];}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 26 ".\\project.l"
+#line 26 "project.l"
 ECHO;
 	YY_BREAK
 #line 727 "lex.yy.c"
@@ -1609,7 +1609,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 26 ".\\project.l"
+#line 26 "project.l"
 
 int yywrap(){
     return 1;
