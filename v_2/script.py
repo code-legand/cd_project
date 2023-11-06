@@ -5,7 +5,7 @@ reserved = {
     'begin': 'BEGINS',
     'end': 'ENDS',
     'while': 'WHILE',
-    'return': 'RETURN'
+    'return': 'RETURN',
 }
 
 # Define tokens

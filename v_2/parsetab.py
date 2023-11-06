@@ -27,10 +27,10 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> INT SP MAIN OPENPARAN CLOSEPARAN NL BEGINS NL stmt ENDS','program',10,'p_program','script.py',49),
-  ('stmt -> declstmt whilestmt returnstmt','stmt',3,'p_stmt','script.py',53),
-  ('declstmt -> SP INT SP ID EQUAL NUM SEMICOL NL','declstmt',8,'p_declstmt','script.py',57),
-  ('whilestmt -> SP WHILE OPENPARAN ID GREATER NUM CLOSEPARAN NL whilebody SP ENDS SP WHILE NL','whilestmt',14,'p_whilestmt','script.py',63),
-  ('whilebody -> SP ID EQUAL ID PLUS NUM SEMICOL NL SP ID EQUAL ID DIVIDE NUM SEMICOL NL','whilebody',16,'p_whilebody','script.py',68),
-  ('returnstmt -> SP RETURN SP ID NL','returnstmt',5,'p_returnstmt','script.py',72),
+  ('program -> INT SP MAIN OPENPARAN CLOSEPARAN NL BEGINS NL stmt ENDS','program',10,'p_program','script.py',58),
+  ('stmt -> declstmt whilestmt returnstmt','stmt',3,'p_stmt','script.py',62),
+  ('declstmt -> SP INT SP ID EQUAL NUM SEMICOL NL','declstmt',8,'p_declstmt','script.py',66),
+  ('whilestmt -> SP WHILE OPENPARAN ID GREATER NUM CLOSEPARAN NL whilebody SP ENDS SP WHILE NL','whilestmt',14,'p_whilestmt','script.py',72),
+  ('whilebody -> SP ID EQUAL ID PLUS NUM SEMICOL NL SP ID EQUAL ID DIVIDE NUM SEMICOL NL','whilebody',16,'p_whilebody','script.py',77),
+  ('returnstmt -> SP RETURN SP ID NL','returnstmt',5,'p_returnstmt','script.py',81),
 ]
