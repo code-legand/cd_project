@@ -2,7 +2,8 @@ import re
 import copy
 
 
-f = open('input.txt', 'r')
+with open('input.txt', 'r') as file:    # CHANGES
+    input_string = file.read()
 
 # tokens
 operators = {'=': 'Assignment Operator', '+': 'Additon Operator', '-': 'Substraction Operator', '>': 'comparision operator','/': 'Division Operator', '*': 'Multiplication Operator', '++': 'increment Operator', '--': 'Decrement Operator'}
@@ -42,10 +43,8 @@ firsts = {}
 follows = {}
 start_symbol = 'S'
 
-
-i = f.read()
 count = 0
-program = i.split('\n')
+program = input_string.split('\n')
 
 
 # lexically analyzer code
@@ -97,7 +96,7 @@ for line in program:
             id = token
     dataFlag = False
     # print("________________________\n")
-f.close()
+
 
 
 # code to compute first and follow
@@ -213,6 +212,60 @@ f.close()
 #                             solset.add(res)
 #     return list(solset)
 
+def removeLeftRecursion(diction):
+    store = {}
+    for A in diction:
+        alpha = []
+        beta = []
+        for rule in diction[A]:
+            if rule[0] == A:
+                alpha.append(rule[1:])
+            else:
+                beta.append(rule)
+        if len(alpha) != 0:
+            newNT = A + "'"
+            while newNT in diction.keys() or newNT in store.keys():
+                newNT += "'"
+            for rule in beta:
+                rule.append(newNT)
+            diction[A] = beta
+            for rule in alpha:
+                rule.append(newNT)
+            store[newNT] = alpha
+    for A in store:
+        diction[A] = store[A]
+    return diction
+
+def LeftFactoring(diction):
+    # global rules, nonterm_userdef, term_userdef, firsts
+    new_diction = {}
+    for A in diction:
+        all_rules = diction[A]
+        temp = dict()
+        for rule in all_rules:
+            if rule[0] not in temp.keys():
+                temp[rule[0]] = [rule]
+            else:
+                temp[rule[0]].append(rule)
+        new_rule = []
+        temp_dict = {}
+        for key in temp:
+            allStartingWithTermKey = temp[key]
+            if len(allStartingWithTermKey) > 1:
+                A_new = A + "'"
+                while(A_new in diction.keys() or A_new in new_diction.keys()):
+                    A_new += "'"
+                new_rule.append([key, A_new])
+                ex_rules = []
+                for rule in allStartingWithTermKey:
+                    ex_rules.append(rule[1:])
+                temp_dict[A_new] = ex_rules
+            else:
+                new_rule.append(allStartingWithTermKey[0])
+        new_diction[A] = new_rule
+        for key in temp_dict:
+            new_diction[key] = temp_dict[key]
+    return new_diction
 
 def first(rule):
     global rules, nonterm_userdef, term_userdef, diction, firsts
@@ -301,10 +354,8 @@ def follow(nt):
 
     while stack:
         current_nt = stack.pop()
-
         if current_nt == start_symbol:
             solset.add('$')
-
         if current_nt not in processed:
             processed.add(current_nt)
 
@@ -325,59 +376,6 @@ def follow(nt):
                             stack.append(subrule[0])
 
     return list(solset)
-
-
-def removeLeftRecursion(diction):
-    global rules, nonterm_userdef, term_userdef, firsts
-    new_diction = {}
-    for A in diction:
-        alpha = []
-        beta = []
-        for rule in diction[A]:
-            if rule[0] == A:
-                alpha.append(rule[1:])
-            else:
-                beta.append(rule)
-        if len(alpha) != 0:
-            newNT = A + "'"
-            new_diction[A] = []
-            for rule in beta:
-                new_diction[A].append(rule + newNT)
-            new_diction[newNT] = []
-            for rule in alpha:
-                new_diction[newNT].append(rule + newNT)
-            new_diction[newNT].append('#')
-        else:
-            new_diction[A] = diction[A]
-    return new_diction
-
-def LeftFactoring(diction):
-    global rules, nonterm_userdef, term_userdef, firsts
-    new_diction = {}
-    for A in diction:
-        new_diction[A] = []
-        while len(diction[A]) != 0:
-            rule = diction[A].pop(0)
-            # rule = rule.split()
-            if len(rule) == 1:
-                new_diction[A].append(rule[0])
-            # elif len(rule) == 0:
-            #     pass
-            else:
-                alpha = rule[1]
-                newNT = A + "'"
-                new_diction[A].append(alpha + newNT)
-                for rule in diction[A]:
-                    # rule = rule.split()
-                    # print(rule)
-                    # print(A)
-                    if len(rule) != 0 and rule[0] == alpha:
-                        new_diction[newNT] = []
-                        new_diction[newNT].append(' '.join(rule[1:]))
-                        diction[A].remove(' '.join(rule[1:]))
-                newNT = newNT.replace("'", "")
-                new_diction[newNT].append('#')
-    return new_diction
 
 def computeAllFirsts():
     global rules, nonterm_userdef, term_userdef, diction, firsts
@@ -626,4 +624,10 @@ def validateStringUsingStackBuffer(parsing_table, grammarll1, table_term_list, i
 computeAllFirsts()
 computeAllFollows()
 mat, terminals, grammar_is_LL = createParseTable()  # CHANGES
-validateStringUsingStackBuffer(parsing_table=mat, grammarll1=grammar_is_LL, table_term_list=terminals, input_string='int main() begin int n = 1 ; while ( n > 1 ) n = n / 2 ; end while return n ; end', term_userdef=term_userdef, start_symbol=start_symbol)
+# validateStringUsingStackBuffer(parsing_table=mat, grammarll1=grammar_is_LL, table_term_list=terminals, input_string='int main() begin int n = 1 ; while ( n > 1 ) n = n / 2 ; end while return n ; end', term_userdef=term_userdef, start_symbol=start_symbol)
+validateStringUsingStackBuffer(parsing_table=mat, grammarll1=grammar_is_LL, table_term_list=terminals, input_string=input_string, term_userdef=term_userdef, start_symbol=start_symbol)
+
+# if sample_input_string == '':
+#     print("\nNo input string provided")
+# else:
+#     validateStringUsingStackBuffer(parsing_table=mat, grammarll1=grammar_is_LL, table_term_list=terminals, input_string=sample_input_string, term_userdef=term_userdef, start_symbol=start_symbol)
